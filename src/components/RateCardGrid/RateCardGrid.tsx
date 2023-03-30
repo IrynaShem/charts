@@ -1,9 +1,11 @@
 import { LineWidget } from "@/components/LineWidget";
-import { ProgressWidget } from "@/components/ProgressWidget/ProgressWidget";
+import { ProgressChartColor } from "@/components/ProgressChart";
+import {
+  Dynamics,
+  ProgressWidget,
+} from "@/components/ProgressWidget/ProgressWidget";
 import { FC } from "react";
 import styled from "styled-components";
-
-export interface RateCardGridProps {}
 
 const Wrapper = styled.div`
   display: flex;
@@ -20,30 +22,30 @@ const ProgressWidgetsWrapper = styled.div`
   gap: 12px;
 `;
 
-export const RateCardGrid: FC<RateCardGridProps> = (props) => {
+export interface RateCardGridProps {
+  colors: [ProgressChartColor, ProgressChartColor, string, string];
+  dynamics: Dynamics;
+}
+
+export const RateCardGrid: FC<RateCardGridProps> = ({ colors, dynamics }) => {
   return (
     <Wrapper>
       <ProgressWidgetsWrapper>
         <ProgressWidgetWrapper>
           <ProgressWidget
+            color={colors[0]}
             name={"Current state"}
-            dynamics={{
-              variant: "up",
-              percentage: 10,
-            }}
-            period={"1 week"}
+            dynamics={dynamics}
+            period={"1 Week"}
             progress={50}
           />
         </ProgressWidgetWrapper>
 
         <ProgressWidgetWrapper>
           <ProgressWidget
-            name={"Current state"}
-            dynamics={{
-              variant: "up",
-              percentage: 10,
-            }}
-            period={"1 week"}
+            color={colors[1]}
+            name={"Target state"}
+            period={"6 Moths"}
             progress={50}
           />
         </ProgressWidgetWrapper>
@@ -57,11 +59,11 @@ export const RateCardGrid: FC<RateCardGridProps> = (props) => {
         datasets={[
           {
             data: [33, 35, 37, 39, 30, 35, 37],
-            borderColor: "#416BFF",
+            borderColor: colors[2],
           },
           {
             data: [30, 37, 39, 32, 34, 31, 39],
-            borderColor: "#23A698",
+            borderColor: colors[3],
           },
         ]}
       />

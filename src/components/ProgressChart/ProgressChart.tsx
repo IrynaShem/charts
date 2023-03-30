@@ -9,7 +9,7 @@ enum ColorVariant {
   yellow = "#FFBA69",
 }
 
-type ProgressChartColor = "blue" | "green" | "pink" | "yellow";
+export type ProgressChartColor = "blue" | "green" | "pink" | "yellow";
 
 export interface ProgressChartProps {
   progress: number;
